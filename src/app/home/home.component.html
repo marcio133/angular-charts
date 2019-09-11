@@ -1,0 +1,29 @@
+<section class="container">
+    <form autocomplete="off">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="estadoSelect">Selecione o estado</label>
+                    <input #inputEstado [(ngModel)]="estado" name="estado" [typeaheadMinLength]="0" [typeahead]="estados" typeaheadOptionField="nome" class="form-control" [typeaheadItemTemplate]="estadoTemplate" (typeaheadOnSelect)="onSelectEstado($event)" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="cidadeInput">Cidade</label>
+                    <input [(ngModel)]="cidade" name="cidade" [typeaheadMinLength]="0" [typeahead]="cidades" typeaheadOptionField="nome" class="form-control" [typeaheadItemTemplate]="cidadeTemplate" (typeaheadOnSelect)="onSelectCidade($event)" />
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<ng-template #estadoTemplate let-model="item" let-index="index">
+    <div [style.width.px]="inputRef.nativeElement.clientWidth - 40">
+        {{ model.nome + "-" + model.sigla }}
+    </div>
+</ng-template>
+<ng-template #cidadeTemplate let-model="item" let-index="index">
+    <div [style.width.px]="inputRef.nativeElement.clientWidth - 40">
+        {{ model.nome }}
+    </div>
+</ng-template>
