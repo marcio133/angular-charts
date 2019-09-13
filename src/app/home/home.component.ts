@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
+import { Label } from "ng2-charts";
 import { TypeaheadMatch } from "ngx-bootstrap/typeahead/public_api";
 import { Estado, Microrregiao } from "../_models/localizacao.models";
 import { ApiService } from "../_services/api.service";
@@ -16,6 +18,23 @@ export class HomeComponent implements OnInit {
   @ViewChild("inputEstado", { static: false }) inputRef: ElementRef;
   estadoSelecionado: Estado;
   cidadeSelecionada: Microrregiao;
+
+  public chartDataBeneficiarios: ChartDataSets[] = [];
+  public chartDataValor: ChartDataSets[] = [];
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = "bar";
+  public barChartLegend = false;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: "end",
+        align: "end"
+      }
+    }
+  };
 
   constructor(private _apiService: ApiService) {}
 
@@ -35,8 +54,21 @@ export class HomeComponent implements OnInit {
   }
 
   async carregarGrafico() {
-    const res = await this._apiService.carregaDados(this.cidadeSelecionada.id);
-    console.log(res);
+    const graficoDados = await this._apiService.carregaDados(
+      this.cidadeSelecionada.id
+    );
+    console.log(graficoDados);
+
+    const dataBeneficiarios = [];
+    const dataValor = [];
+    graficoDados.forEach(mes => {
+      dataBeneficiarios.push(mes.quantidadeBeneficiados);
+      dataValor.push(mes.valor);
+      this.barChartLabels.push(mes.dataReferencia);
+    });
+
+    this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
+    this.chartDataValor.push({ data: dataValor });
   }
 
   onSelectEstado(event: TypeaheadMatch): void {
