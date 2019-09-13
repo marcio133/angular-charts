@@ -12,13 +12,22 @@ export interface Estado {
 }
 
 export interface Mesorregiao {
-  id: number;
+  id: string;
   nome: string;
   UF: Estado;
 }
 
 export interface Microrregiao {
-  id: number;
+  id: string;
   nome: string;
   mesorregiao: Mesorregiao;
+}
+
+export interface ValorBeneficio {
+  id: number;
+  dataReferencia: string;
+  // municipio: Municipio;
+  // tipo: Tipo;
+  valor: number;
+  quantidadeBeneficiados: number;
 }

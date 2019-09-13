@@ -34,6 +34,11 @@ export class HomeComponent implements OnInit {
     this.cidades = await this._apiService.getCidades(id);
   }
 
+  async carregarGrafico() {
+    const res = await this._apiService.carregaDados(this.cidadeSelecionada.id);
+    console.log(res);
+  }
+
   onSelectEstado(event: TypeaheadMatch): void {
     this.estadoSelecionado = event.item;
     this.estado = `${this.estadoSelecionado.nome}-${this.estadoSelecionado.sigla} `;
@@ -42,6 +47,6 @@ export class HomeComponent implements OnInit {
 
   onSelectCidade(event: TypeaheadMatch): void {
     this.cidadeSelecionada = event.item;
-    console.log(this.estadoSelecionado.id + this.cidadeSelecionada.id);
+    this.carregarGrafico();
   }
 }

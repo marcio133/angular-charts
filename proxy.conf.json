@@ -1,0 +1,7 @@
+{
+    "/api-de-dados": {
+        "target": "http://www.transparencia.gov.br/",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
