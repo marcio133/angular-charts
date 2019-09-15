@@ -11,6 +11,9 @@ $input-color: #e5e9fa;
   border: transparent;
   &:focus {
     color: $secondary-color;
+    box-shadow: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
 
@@ -18,4 +21,11 @@ $input-color: #e5e9fa;
   label {
     color: $secondary-color;
   }
+}
+
+typeahead-container {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  top: -2px !important;
+  border: none !important;
 }

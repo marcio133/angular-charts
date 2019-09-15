@@ -22,6 +22,7 @@
           <label for="cidadeInput">Cidade</label>
           <input
             [(ngModel)]="cidade"
+            [disabled]="disabledInputCidade"
             name="cidade"
             [typeaheadMinLength]="0"
             [typeahead]="cidades"
@@ -35,12 +36,14 @@
     </div>
   </form>
 </section>
-<section class="container-fluid section-graph">
+<section class="container section-graph">
   <div class="row" *ngIf="barChartLabels.length">
-    <div class="graph col">
+    <div class="graph col-md-12">
+      <label class="graph-title">Grafico de Beneficiários</label>
       <div style="display: block">
         <canvas
           baseChart
+          [colors]="lineChartColors"
           [datasets]="chartDataBeneficiarios"
           [labels]="barChartLabels"
           [options]="barChartOptions"
@@ -50,10 +53,12 @@
         </canvas>
       </div>
     </div>
-    <div class="graph col">
+    <div class="graph col-md-12">
+      <label class="graph-title">Grafico de Valores</label>
       <div style="display: block">
         <canvas
           baseChart
+          [colors]="lineChartColors"
           [datasets]="chartDataValor"
           [labels]="barChartLabels"
           [options]="barChartOptions"
@@ -66,12 +71,12 @@
   </div>
 </section>
 <ng-template #estadoTemplate let-model="item" let-index="index">
-  <div [style.width.px]="inputRef.nativeElement.clientWidth - 40">
+  <div [style.width.px]="inputRef.nativeElement.clientWidth - 48">
     {{ model.nome + "-" + model.sigla }}
   </div>
 </ng-template>
 <ng-template #cidadeTemplate let-model="item" let-index="index">
-  <div [style.width.px]="inputRef.nativeElement.clientWidth - 40">
+  <div [style.width.px]="inputRef.nativeElement.clientWidth - 48">
     {{ model.nome }}
   </div>
 </ng-template>

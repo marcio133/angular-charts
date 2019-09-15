@@ -27,7 +27,28 @@ export class HomeComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            fontFamily: "Montserrat Alternates"
+          }
+        }
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            fontFamily: "Montserrat Alternates"
+          }
+        }
+      ]
+    },
     plugins: {
       datalabels: {
         anchor: "end",
@@ -35,6 +56,11 @@ export class HomeComponent implements OnInit {
       }
     }
   };
+  public lineChartColors = [
+    {
+      backgroundColor: "#4c56ba"
+    }
+  ];
 
   constructor(private _apiService: ApiService) {}
 
@@ -80,5 +106,11 @@ export class HomeComponent implements OnInit {
   onSelectCidade(event: TypeaheadMatch): void {
     this.cidadeSelecionada = event.item;
     this.carregarGrafico();
+  }
+
+  get disabledInputCidade() {
+    return (
+      this.estadoSelecionado == null || this.estadoSelecionado == undefined
+    );
   }
 }
