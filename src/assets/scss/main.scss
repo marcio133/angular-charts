@@ -21,6 +21,7 @@
 @import "nav";
 @import "form";
 @import "graph";
+@import "loading";
 
 html,
 body {
@@ -29,6 +30,7 @@ body {
 
 * {
   @include font-regular;
+  color: $base-text-color;
 }
 
 .container {

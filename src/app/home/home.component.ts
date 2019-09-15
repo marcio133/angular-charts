@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { ChartDataSets, ChartOptions, ChartType } from "chart.js";
+import { ChartDataSets } from "chart.js";
 import { Label } from "ng2-charts";
 import { TypeaheadMatch } from "ngx-bootstrap/typeahead/public_api";
 import { Estado, Microrregiao } from "../_models/localizacao.models";
@@ -15,57 +15,20 @@ export class HomeComponent implements OnInit {
   cidades: Array<Microrregiao> = [];
   estado: string;
   cidade: string;
-  @ViewChild("inputEstado", { static: false }) inputRef: ElementRef;
   estadoSelecionado: Estado;
   cidadeSelecionada: Microrregiao;
 
   public chartDataBeneficiarios: ChartDataSets[] = [];
   public chartDataValor: ChartDataSets[] = [];
   public barChartLabels: Label[] = [];
-  public barChartType: ChartType = "bar";
-  public barChartLegend = false;
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            display: false
-          },
-          ticks: {
-            fontFamily: "Montserrat Alternates"
-          }
-        }
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: false
-          },
-          ticks: {
-            fontFamily: "Montserrat Alternates"
-          }
-        }
-      ]
-    },
-    plugins: {
-      datalabels: {
-        anchor: "end",
-        align: "end"
-      }
-    }
-  };
-  public lineChartColors = [
-    {
-      backgroundColor: "#4c56ba"
-    }
-  ];
+  loading: boolean = false;
+
+  @ViewChild("inputEstado", { static: false }) inputRef: ElementRef;
+  @ViewChild("inputCidade", { static: false }) inputRefCidade: ElementRef;
 
   constructor(private _apiService: ApiService) {}
 
   ngOnInit() {
-    console.log(this.inputRef);
     this.carregarEstados();
   }
 
@@ -80,11 +43,13 @@ export class HomeComponent implements OnInit {
   }
 
   async carregarGrafico() {
+    this.setLoading(true);
+    this.inputRefCidade.nativeElement.blur();
+
     const graficoDados = await this._apiService.carregaDados(
       this.cidadeSelecionada.id
     );
-    console.log(graficoDados);
-
+    this.reiniciaGrafico();
     const dataBeneficiarios = [];
     const dataValor = [];
     graficoDados.forEach(mes => {
@@ -95,6 +60,13 @@ export class HomeComponent implements OnInit {
 
     this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
     this.chartDataValor.push({ data: dataValor });
+    this.setLoading();
+  }
+
+  reiniciaGrafico() {
+    this.chartDataBeneficiarios = [];
+    this.chartDataValor = [];
+    this.barChartLabels = [];
   }
 
   onSelectEstado(event: TypeaheadMatch): void {
@@ -106,6 +78,10 @@ export class HomeComponent implements OnInit {
   onSelectCidade(event: TypeaheadMatch): void {
     this.cidadeSelecionada = event.item;
     this.carregarGrafico();
+  }
+
+  setLoading(loading = false) {
+    this.loading = loading;
   }
 
   get disabledInputCidade() {

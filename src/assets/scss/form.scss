@@ -29,3 +29,9 @@ typeahead-container {
   top: -2px !important;
   border: none !important;
 }
+
+.active {
+  .ng-star-inserted {
+    color: white;
+  }
+}

@@ -1,16 +1,36 @@
 $graph-container-background: #fefefe;
 
 .graph {
+  display: inline-block;
   background-color: $graph-container-background;
-  padding: 15px 40px;
+  padding: 15px;
   padding-bottom: 25px;
   border-radius: 15px;
-  margin: 10px auto;
+  margin: 13px;
   @media (max-width: 580px) {
     padding: 10px;
+  }
+  @media (max-width: 1000px) {
+    width: 95% !important;
+    .btn-graph {
+      display: none;
+    }
   }
 }
 
 .graph-title {
   margin-bottom: 30px;
+}
+
+.icon-spinner-2:before {
+  content: "\e001";
+}
+
+@keyframes anim-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
