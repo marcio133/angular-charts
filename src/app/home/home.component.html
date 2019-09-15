@@ -1,7 +1,7 @@
-<section class="container">
+<section class="container form-section">
   <form autocomplete="off">
     <div class="row">
-      <div class="col">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="estadoSelect">Selecione o estado</label>
           <input
@@ -17,7 +17,7 @@
           />
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="cidadeInput">Cidade</label>
           <input
@@ -34,8 +34,10 @@
       </div>
     </div>
   </form>
+</section>
+<section class="container-fluid section-graph">
   <div class="row" *ngIf="barChartLabels.length">
-    <div class="col">
+    <div class="graph col">
       <div style="display: block">
         <canvas
           baseChart
@@ -48,7 +50,7 @@
         </canvas>
       </div>
     </div>
-    <div class="col">
+    <div class="graph col">
       <div style="display: block">
         <canvas
           baseChart
@@ -63,7 +65,6 @@
     </div>
   </div>
 </section>
-
 <ng-template #estadoTemplate let-model="item" let-index="index">
   <div [style.width.px]="inputRef.nativeElement.clientWidth - 40">
     {{ model.nome + "-" + model.sigla }}

@@ -1,0 +1,14 @@
+$navbar-text-color: white;
+$narbar-radius: 10px;
+.navbar-brand {
+  color: $navbar-text-color;
+  @include font-bold;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.navbar {
+  background-color: $primary-color;
+  border-bottom-left-radius: $narbar-radius;
+  border-bottom-right-radius: $narbar-radius;
+}

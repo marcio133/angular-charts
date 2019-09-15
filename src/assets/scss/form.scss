@@ -1,0 +1,21 @@
+$input-color: #e5e9fa;
+
+.form-section {
+  margin-top: 109px;
+  margin-bottom: 55px;
+}
+
+.form-control {
+  background-color: $input-color;
+  color: $secondary-color;
+  border: transparent;
+  &:focus {
+    color: $secondary-color;
+  }
+}
+
+.form-group {
+  label {
+    color: $secondary-color;
+  }
+}
