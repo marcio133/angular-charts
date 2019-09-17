@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import * as moment from "moment";
 import { catchError, map } from "rxjs/operators";
@@ -28,7 +28,7 @@ export class ApiService {
   getCidades(uf: string): Promise<Array<Microrregiao>> {
     return this._httpClient
       .get(
-        `http://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
       )
       .pipe(
         map(res => {
@@ -58,23 +58,26 @@ export class ApiService {
   }
 
   getDadoEmMes(mesAno: string, codigoCidade: string) {
-    const headers = new HttpHeaders({ "Content-Type": "text/plain" });
-
     return this._httpClient
       .get(
-        `api-de-dados/bolsa-familia-por-municipio?mesAno=${mesAno}&codigoIbge=${codigoCidade}&pagina=1`,
-        { responseType: "json", headers }
+        `https://api.allorigins.win/get?url=${encodeURIComponent(
+          `http://www.transparencia.gov.br/api-de-dados/bolsa-familia-por-municipio?mesAno=${mesAno}&codigoIbge=${codigoCidade}&pagina=1`
+        )}`
       )
       .pipe(
         map(
-          (res: Array<any>) => {
-            delete res[0].municipio;
-            delete res[0].tipo;
+          (res: any) => {
+            console.log(res);
 
-            const result = <ValorBeneficio>res[0];
-            result.dataReferencia = result.dataReferencia.slice(-7);
+            let { contents } = res;
+            contents = JSON.parse(contents);
+            delete contents[0].municipio;
+            delete contents[0].tipo;
 
-            return result;
+            const content = <ValorBeneficio>contents[0];
+            content.dataReferencia = content.dataReferencia.slice(-7);
+
+            return content;
           },
           catchError(() => {
             return null;

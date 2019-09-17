@@ -11,7 +11,9 @@ import { ApiService } from "../_services/api.service";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  estados: Array<Estado>;
+  estados: Array<Estado> = [
+    { id: "0", sigla: "", nome: "Carregando...", regiao: null }
+  ];
   cidades: Array<Microrregiao> = [];
   estado: string;
   cidade: string;
@@ -25,6 +27,8 @@ export class HomeComponent implements OnInit {
 
   @ViewChild("inputEstado", { static: false }) inputRef: ElementRef;
   @ViewChild("inputCidade", { static: false }) inputRefCidade: ElementRef;
+  erro: boolean;
+  erroMenssagem: string;
 
   constructor(private _apiService: ApiService) {}
 
@@ -33,7 +37,9 @@ export class HomeComponent implements OnInit {
   }
 
   async carregarEstados() {
+    this.setLoading(true);
     this.estados = await this._apiService.getEstados();
+    this.setLoading();
   }
 
   async carregarCidades() {
@@ -45,10 +51,12 @@ export class HomeComponent implements OnInit {
   async carregarGrafico() {
     this.setLoading(true);
     this.inputRefCidade.nativeElement.blur();
-
+    // try {
     const graficoDados = await this._apiService.carregaDados(
       this.cidadeSelecionada.id
     );
+    console.log(graficoDados);
+
     this.reiniciaGrafico();
     const dataBeneficiarios = [];
     const dataValor = [];
@@ -60,7 +68,15 @@ export class HomeComponent implements OnInit {
 
     this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
     this.chartDataValor.push({ data: dataValor });
+    // } catch (error) {
+    // console.log(error);
+
+    // this.erro = true;
+    // this.erroMenssagem =
+    //   "Ocorreu um erro ao tentar recuperar os dados, por favor tente novamente.";
+    // } finally {
     this.setLoading();
+    // }
   }
 
   reiniciaGrafico() {
@@ -82,6 +98,10 @@ export class HomeComponent implements OnInit {
 
   setLoading(loading = false) {
     this.loading = loading;
+  }
+
+  removeErro() {
+    this.erro = false;
   }
 
   get disabledInputCidade() {
