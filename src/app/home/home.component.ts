@@ -7,8 +7,7 @@ import { ApiService } from "../_services/api.service";
 
 @Component({
   selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
   estados: Array<Estado> = [
@@ -51,11 +50,9 @@ export class HomeComponent implements OnInit {
   async carregarGrafico() {
     this.setLoading(true);
     this.inputRefCidade.nativeElement.blur();
+    const { id } = this.cidadeSelecionada;
     try {
-      const graficoDados = await this._apiService.carregaDados(
-        this.cidadeSelecionada.id
-      );
-      console.log(graficoDados);
+      const graficoDados = await this._apiService.carregaDados(id);
 
       this.reiniciaGrafico();
       const dataBeneficiarios = [];
@@ -65,10 +62,13 @@ export class HomeComponent implements OnInit {
         dataValor.push(mes.valor);
         this.barChartLabels.push(mes.dataReferencia);
       });
+      console.log(dataBeneficiarios);
 
       this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
       this.chartDataValor.push({ data: dataValor });
     } catch (error) {
+      console.log(error);
+
       this.erro = true;
       this.erroMenssagem =
         "Ocorreu um erro ao tentar recuperar os dados, por favor tente novamente.";
@@ -84,6 +84,8 @@ export class HomeComponent implements OnInit {
   }
 
   onSelectEstado(event: TypeaheadMatch): void {
+    console.log(event);
+
     this.estadoSelecionado = event.item;
     this.estado = `${this.estadoSelecionado.nome}-${this.estadoSelecionado.sigla} `;
     this.carregarCidades();
@@ -104,7 +106,7 @@ export class HomeComponent implements OnInit {
 
   get disabledInputCidade() {
     return (
-      this.estadoSelecionado == null || this.estadoSelecionado == undefined
+      this.estadoSelecionado === null || this.estadoSelecionado === undefined
     );
   }
 }

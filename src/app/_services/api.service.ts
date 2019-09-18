@@ -67,8 +67,6 @@ export class ApiService {
       .pipe(
         map(
           (res: any) => {
-            console.log(res);
-
             let { contents } = res;
             contents = JSON.parse(contents);
             delete contents[0].municipio;
