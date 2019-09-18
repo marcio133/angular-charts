@@ -1,13 +1,16 @@
-{
+]{
   "name": "angular-graph",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "appBuild": "ng build --prod --output-hashing=none",
+    "appRun": "npm run appBuild && cd dist/angular-graph && http-server ",
+    "firebaseDeploy": "npm run appBuild && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -18,8 +21,17 @@
     "@angular/forms": "~8.2.0",
     "@angular/platform-browser": "~8.2.0",
     "@angular/platform-browser-dynamic": "~8.2.0",
+    "@angular/pwa": "^0.803.4",
     "@angular/router": "~8.2.0",
+    "@angular/service-worker": "~8.2.0",
+    "@fortawesome/angular-fontawesome": "^0.5.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
+    "datejs": "^1.0.0-rc3",
+    "moment": "^2.24.0",
+    "ng2-charts": "^2.3.0",
     "ngx-bootstrap": "^5.1.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

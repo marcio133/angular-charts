@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Montserrat Alternates";
+  font-display: swap;
+  src: url("../Montserrat/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: "Montserrat Alternates";
+  font-display: swap;
+  src: url("../Montserrat/Montserrat-Bold.ttf");
+  font-weight: 900;
+}
+
+@mixin font-regular {
+  font-family: "Montserrat Alternates";
+  font-weight: 400;
+}
+
+@mixin font-bold {
+  font-family: "Montserrat Alternates";
+  font-weight: 900;
+}
+@import "colors";
+@import "nav";
+@import "form";
+@import "graph";
+@import "loading";
+
+html,
+body {
+  background-color: $background;
+}
+
+* {
+  @include font-regular;
+  color: $base-text-color;
+}
+
+.container {
+  width: 90%;
+}

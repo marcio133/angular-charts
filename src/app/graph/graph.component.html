@@ -1,0 +1,28 @@
+<div class="graph" [ngStyle]="{ width: dymWidth }">
+  <div class="row">
+    <div class="col">
+      <label class="graph-title">{{ titulo }}</label>
+    </div>
+    <div class="col-auto text-right">
+      <button
+        class="btn btn-graph"
+        title="{{ buttonTitle }}"
+        (click)="resize()"
+      >
+        <fa-icon [icon]="icon"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="chart-container" style="display: block;">
+    <canvas
+      baseChart
+      [colors]="lineChartColors"
+      [datasets]="chartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+    >
+    </canvas>
+  </div>
+</div>
