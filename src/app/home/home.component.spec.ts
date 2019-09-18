@@ -156,28 +156,6 @@ describe("HomeComponent", () => {
     expect(component.erroMenssagem).toContain("Ocorreu um erro");
   }));
 
-  it("when carregarGrafico() return an error and alert must be show on the screen", fakeAsync(() => {
-    //Mock de requisição
-    spyOn(apiService, "carregaDados").and.callFake(() => {
-      return new Promise(() => {
-        throw new Error("test error inside");
-      });
-    });
-
-    component.cidadeSelecionada = cidadeTeste;
-
-    component.carregarGrafico();
-
-    tick();
-    fixture.detectChanges();
-    console.log(component.erro);
-
-    const alert = fixture.debugElement.query(By.css(".alert"));
-    console.log(alert.nativeElement);
-
-    expect(alert.nativeElement).toBeTruthy();
-  }));
-
   it("onSelectEstado() must call carregarCidades() and set estado and estadoSelecionado", () => {
     //Mock de requisição
     spyOn(apiService, "getCidades").and.returnValue(
