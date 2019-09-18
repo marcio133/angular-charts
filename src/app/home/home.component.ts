@@ -67,8 +67,6 @@ export class HomeComponent implements OnInit {
       this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
       this.chartDataValor.push({ data: dataValor });
     } catch (error) {
-      console.log(error);
-
       this.erro = true;
       this.erroMenssagem =
         "Ocorreu um erro ao tentar recuperar os dados, por favor tente novamente.";

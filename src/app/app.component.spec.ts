@@ -26,4 +26,14 @@ describe("AppComponent", () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual("angular-graph");
   });
+
+  it(`ngOnInit should call reloadCache()`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
+    spyOn(component, "reloadCache");
+
+    component.ngOnInit();
+
+    expect(component.reloadCache).toHaveBeenCalledTimes(1);
+  });
 });

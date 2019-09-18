@@ -4,7 +4,11 @@
       <label class="graph-title">{{ titulo }}</label>
     </div>
     <div class="col-auto text-right">
-      <button class="btn btn-graph" title="buttonTitle" (click)="resize()">
+      <button
+        class="btn btn-graph"
+        title="{{ buttonTitle }}"
+        (click)="resize()"
+      >
         <fa-icon [icon]="icon"></fa-icon>
       </button>
     </div>

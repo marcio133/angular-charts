@@ -55,7 +55,7 @@ export class GraphComponent implements OnInit {
   ];
   dymWidth: string = "48%";
   icon = faExpandArrowsAlt;
-  buttonTitle: string;
+  buttonTitle: string = "Expandir";
 
   constructor() {}
 
