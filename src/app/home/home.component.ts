@@ -62,7 +62,6 @@ export class HomeComponent implements OnInit {
         dataValor.push(mes.valor);
         this.barChartLabels.push(mes.dataReferencia);
       });
-      console.log(dataBeneficiarios);
 
       this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
       this.chartDataValor.push({ data: dataValor });
@@ -82,8 +81,6 @@ export class HomeComponent implements OnInit {
   }
 
   onSelectEstado(event: TypeaheadMatch): void {
-    console.log(event);
-
     this.estadoSelecionado = event.item;
     this.estado = `${this.estadoSelecionado.nome}-${this.estadoSelecionado.sigla} `;
     this.carregarCidades();
