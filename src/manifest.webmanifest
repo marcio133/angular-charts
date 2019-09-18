@@ -1,8 +1,8 @@
 {
   "name": "angular-graph",
   "short_name": "angular-graph",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#4c56ba",
+  "background_color": "#f3f0f5",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

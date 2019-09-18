@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "appBuild": "ng build --prod --output-hashing=none",
-    "appRun": "npm run appBuild && cd dist/angular-graph && http-server "
+    "appRun": "npm run appBuild && cd dist/angular-graph && http-server ",
+    "firebaseDeploy": "npm run appBuild && firebase deploy"
   },
   "private": true,
   "dependencies": {

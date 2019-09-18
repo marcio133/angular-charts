@@ -14,6 +14,7 @@ import { Label } from "ng2-charts";
 export class GraphComponent implements OnInit {
   @Input() public chartData: ChartDataSets[] = [];
   @Input() public barChartLabels: Label[] = [];
+  @Input() public titulo: string;
   public barChartType: ChartType = "bar";
   public barChartLegend = false;
   public barChartOptions: ChartOptions = {
@@ -53,7 +54,7 @@ export class GraphComponent implements OnInit {
       backgroundColor: "#4c56ba"
     }
   ];
-  dymWidth: string = "47%";
+  dymWidth: string = "48%";
   icon = faExpandArrowsAlt;
   buttonTitle: string;
 
@@ -63,7 +64,7 @@ export class GraphComponent implements OnInit {
 
   resize() {
     if (this.dymWidth === "100%") {
-      this.dymWidth = "47%";
+      this.dymWidth = "48%";
       this.icon = faExpandArrowsAlt;
       this.buttonTitle = "Expandir";
     } else {

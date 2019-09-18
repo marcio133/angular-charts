@@ -51,32 +51,30 @@ export class HomeComponent implements OnInit {
   async carregarGrafico() {
     this.setLoading(true);
     this.inputRefCidade.nativeElement.blur();
-    // try {
-    const graficoDados = await this._apiService.carregaDados(
-      this.cidadeSelecionada.id
-    );
-    console.log(graficoDados);
+    try {
+      const graficoDados = await this._apiService.carregaDados(
+        this.cidadeSelecionada.id
+      );
+      console.log(graficoDados);
 
-    this.reiniciaGrafico();
-    const dataBeneficiarios = [];
-    const dataValor = [];
-    graficoDados.forEach(mes => {
-      dataBeneficiarios.push(mes.quantidadeBeneficiados);
-      dataValor.push(mes.valor);
-      this.barChartLabels.push(mes.dataReferencia);
-    });
+      this.reiniciaGrafico();
+      const dataBeneficiarios = [];
+      const dataValor = [];
+      graficoDados.forEach(mes => {
+        dataBeneficiarios.push(mes.quantidadeBeneficiados);
+        dataValor.push(mes.valor);
+        this.barChartLabels.push(mes.dataReferencia);
+      });
 
-    this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
-    this.chartDataValor.push({ data: dataValor });
-    // } catch (error) {
-    // console.log(error);
-
-    // this.erro = true;
-    // this.erroMenssagem =
-    //   "Ocorreu um erro ao tentar recuperar os dados, por favor tente novamente.";
-    // } finally {
-    this.setLoading();
-    // }
+      this.chartDataBeneficiarios.push({ data: dataBeneficiarios });
+      this.chartDataValor.push({ data: dataValor });
+    } catch (error) {
+      this.erro = true;
+      this.erroMenssagem =
+        "Ocorreu um erro ao tentar recuperar os dados, por favor tente novamente.";
+    } finally {
+      this.setLoading();
+    }
   }
 
   reiniciaGrafico() {

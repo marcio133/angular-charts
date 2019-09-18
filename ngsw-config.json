@@ -30,9 +30,9 @@
   "dataGroups": [
     {
       "name": "Search API",
-      "urls": ["https://servicodados.ibge.gov.br/api/**"],
+      "urls": ["https://servicodados.ibge.gov.br/**"],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxAge": "100d",
         "maxSize": 100
       }

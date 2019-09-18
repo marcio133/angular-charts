@@ -1,17 +1,18 @@
 $graph-container-background: #fefefe;
 
 .graph {
+  flex: 1;
   display: inline-block;
   background-color: $graph-container-background;
   padding: 15px;
   padding-bottom: 25px;
-  border-radius: 15px;
-  margin: 13px;
+  border-radius: 10px;
+  margin: 15px 0;
   @media (max-width: 580px) {
     padding: 10px;
   }
   @media (max-width: 1000px) {
-    width: 95% !important;
+    width: 100% !important;
     .btn-graph {
       display: none;
     }
@@ -33,4 +34,12 @@ $graph-container-background: #fefefe;
   100% {
     transform: rotate(360deg);
   }
+}
+
+.section-graph > :first-child > :first-child > :first-child {
+  margin-right: 35px;
+}
+
+.section-graph {
+  margin-bottom: 50px;
 }
